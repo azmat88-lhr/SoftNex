@@ -62,30 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isAndroid = /Android/i.test(ua);
 
-    // iOS: open the native Mail app via mailto:
     if (isIOS) {
       window.location.href = `mailto:${email}`;
       return;
     }
-
-    // Android: try to open Gmail app first, fallback to mailto: if not available
     if (isAndroid) {
       const gmailScheme = `googlegmail://co?to=${encodeURIComponent(email)}`;
       const mailto = `mailto:${email}`;
       let fallbackTimer = null;
 
-      // Attempt to open Gmail app via URL scheme. If the app isn't installed,
-      // the timer will navigate to mailto: which will open any available mail client.
       try {
-        // Start fallback timer
         fallbackTimer = setTimeout(() => {
           window.location.href = mailto;
         }, 700);
-
-        // Try opening Gmail app
         window.location.href = gmailScheme;
-
-        // If the page becomes hidden (app opened), cancel fallback
         const onVisibility = () => {
           clearTimeout(fallbackTimer);
           document.removeEventListener('visibilitychange', onVisibility);
@@ -98,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Default: open mailto: (desktop and other platforms)
     window.location.href = `mailto:${email}`;
   });
 
