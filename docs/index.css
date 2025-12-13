@@ -213,9 +213,9 @@ footer a[href^="mailto:"]:hover {
   background-color: lightgray;
 }
 .team-img {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+  width: 196px;
+  height: 196px;
+  border-radius: 14px;
   object-fit: cover;
   margin: 0 auto 12px;
   object-position: center;
