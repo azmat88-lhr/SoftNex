@@ -57,25 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (heroCta) {
     heroCta.addEventListener('click', (ev) => {
       ev.preventDefault();
-      const existing = document.getElementById('hero-contact-form');
-      if (existing) {
-        existing.scrollIntoView({ behavior: 'smooth' });
-        existing.querySelector('input, textarea, button')?.focus();
-        return;
-      }
-      const contactForm = document.querySelector('#contact form');
-      if (contactForm) {
-        const clone = contactForm.cloneNode(true);
-        clone.id = 'hero-contact-form';
-        const hero = document.querySelector('.hero');
-        if (hero) {
-          hero.appendChild(clone);
-          clone.scrollIntoView({ behavior: 'smooth' });
-          clone.querySelector('input, textarea')?.focus();
-        }
-      } else {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+      // Open a new blank contact page in a new tab/window
+      try {
+        window.open('contact.html', '_blank');
+      } catch (err) {
+        // Fallback: navigate in the same tab
+        window.location.href = 'contact.html';
       }
     });
   }
