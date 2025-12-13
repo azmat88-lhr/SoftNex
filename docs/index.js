@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle submit for any form on the page (including cloned forms)
+
   document.addEventListener('submit', async (e) => {
     const form = e.target;
     if (!form || form.tagName !== 'FORM') return;
@@ -53,8 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Unable to submit form. Please try again later.');
     }
   });
-
-  // Clone contact form into hero when CTA is clicked
   const heroCta = document.getElementById('hero-cta');
   if (heroCta) {
     heroCta.addEventListener('click', (ev) => {
