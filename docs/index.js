@@ -23,33 +23,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const form = document.querySelector('form');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const payload = {
-        name: formData.get('name') || form.querySelector('input[placeholder="Your Name"]').value,
-        email: formData.get('email') || form.querySelector('input[placeholder="Your Email"]').value,
-        message: formData.get('message') || form.querySelector('textarea').value
-      };
+  // Handle submit for any form on the page (including cloned forms)
+  document.addEventListener('submit', async (e) => {
+    const form = e.target;
+    if (!form || form.tagName !== 'FORM') return;
+    e.preventDefault();
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get('name') || form.querySelector('input[placeholder="Your Name"]')?.value || '',
+      email: formData.get('email') || form.querySelector('input[placeholder="Your Email"]')?.value || '',
+      message: formData.get('message') || form.querySelector('textarea')?.value || ''
+    };
 
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (res.ok && data.ok) {
-          alert('Thank you for contacting SoftNex! We will get back to you soon.');
-          form.reset();
-        } else {
-          alert('Submission failed: ' + (data.error || 'Unknown error'));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        alert('Thank you for contacting SoftNex! We will get back to you soon.');
+        form.reset();
+      } else {
+        alert('Submission failed: ' + (data.error || 'Unknown error'));
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Unable to submit form. Please try again later.');
+    }
+  });
+
+  // Clone contact form into hero when CTA is clicked
+  const heroCta = document.getElementById('hero-cta');
+  if (heroCta) {
+    heroCta.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const existing = document.getElementById('hero-contact-form');
+      if (existing) {
+        existing.scrollIntoView({ behavior: 'smooth' });
+        existing.querySelector('input, textarea, button')?.focus();
+        return;
+      }
+      const contactForm = document.querySelector('#contact form');
+      if (contactForm) {
+        const clone = contactForm.cloneNode(true);
+        clone.id = 'hero-contact-form';
+        const hero = document.querySelector('.hero');
+        if (hero) {
+          hero.appendChild(clone);
+          clone.scrollIntoView({ behavior: 'smooth' });
+          clone.querySelector('input, textarea')?.focus();
         }
-      } catch (err) {
-        console.error(err);
-        alert('Unable to submit form. Please try again later.');
+      } else {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
