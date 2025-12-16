@@ -151,18 +151,86 @@ section h2 {
 }
 
 
-.contact form {
-  max-width: 500px;
-  margin: auto;
+/* Section */
+.contact {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  text-align: center;
 }
 
+/* Heading */
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #0f172a;
+}
+
+/* Form Card */
+.contact form {
+  max-width: 520px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Inputs */
 .contact input,
 .contact textarea {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 16px 18px;
+  margin: 12px 0;
+  border-radius: 14px;
+  border: 1.5px solid #e5e7eb;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* Focus effect */
+.contact input:focus,
+.contact textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Textarea */
+.contact textarea {
+  resize: none;
+}
+
+/* Button */
+.contact .btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5b7cfa, #6b6dfd);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Button hover */
+.contact .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(99, 102, 241, 0.35);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .contact h2 {
+    font-size: 28px;
+  }
+
+  .contact form {
+    padding: 32px 24px;
+  }
 }
 
 /* Footer */
@@ -323,4 +391,77 @@ footer a[href^="mailto:"]:hover {
     width: 32px;
     height: 32px;
   }
+}
+
+.glass-btn {
+  position: relative;
+  width: 255px;
+  height: 55px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Back white layer (right side only) */
+.back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;              /* more space for arrow */
+  height: 100%;
+  background: white;
+  border-radius: 0 40px 40px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 18px;     /* pushes arrow to edge */
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+/* Arrow */
+.arrow {
+  font-size: 22px;
+  color: #0f172a;
+  transform: translateX(0);   /* no left shift now */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+
+.front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #5b7cfa, #6b6dfd);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+  z-index: 2;
+}
+
+/* Hover animation */
+.glass-btn:hover .front {
+  transform: translateX(-32px);
+}
+
+.glass-btn:hover .back {
+  opacity: 1;
+}
+
+.glass-btn:hover .arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+html {
+  scroll-behavior: smooth;
 }
