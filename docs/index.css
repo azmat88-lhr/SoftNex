@@ -22,7 +22,6 @@ body {
   color: #fff;
   position: sticky;
   top: 0;
-  z-index: 9999;
 }
 
 .logo {
@@ -152,59 +151,86 @@ section h2 {
 }
 
 
-.contact-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 28px;
-  align-items: start;
+/* Section */
+.contact {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  text-align: center;
 }
 
-.contact-card {
-  background: #ffffff;
-  padding: 28px;
+/* Heading */
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #0f172a;
+}
+
+/* Form Card */
+.contact form {
+  max-width: 520px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Inputs */
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 16px 18px;
+  margin: 12px 0;
   border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+  border: 1.5px solid #e5e7eb;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.25s ease;
 }
 
-.contact-info .info-card {
-  background: linear-gradient(180deg, #0b1c2d 0%, #133a63 100%);
+/* Focus effect */
+.contact input:focus,
+.contact textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Textarea */
+.contact textarea {
+  resize: none;
+}
+
+/* Button */
+.contact .btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5b7cfa, #6b6dfd);
   color: #fff;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(11,28,45,0.18);
+  transition: all 0.3s ease;
 }
-.contact-info .info-card h3 {
-  margin-top: 0;
+
+/* Button hover */
+.contact .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(99, 102, 241, 0.35);
 }
-.contact-info .info-card a { color: #a7f0ff; text-decoration: none; }
-.contact-info .socials { margin-top: 14px; display:flex; gap:10px; }
-.contact-info .social { background: rgba(255,255,255,0.08); color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-size:14px }
 
-.contact-form .form-row { display:flex; gap:12px; }
-.contact-form .form-row .form-group { flex:1; }
-.contact-form .form-group.full { grid-column: 1 / -1; }
+/* Mobile */
+@media (max-width: 480px) {
+  .contact h2 {
+    font-size: 28px;
+  }
 
-.form-group { margin-bottom: 12px; text-align: left; }
-.form-group label { display:block; font-size:13px; color:#344054; margin-bottom:6px; }
-.input-wrap { position:relative; display:flex; align-items:center; }
-.input-wrap input,
-.input-wrap textarea { width:100%; padding:12px 12px 12px 38px; border-radius:10px; border:1px solid #e6e9ef; background:#fbfdff; transition:box-shadow .12s ease, border-color .12s ease; font-size:15px; color:#0b1c2d }
-.input-wrap.textarea-wrap textarea { padding:12px 12px; height:140px; resize:vertical; padding-left:12px }
-.input-icon { position:absolute; left:12px; color:#00a6d6 }
-
-.input-wrap input:focus,
-.input-wrap textarea:focus { outline:none; border-color:#00c6ff; box-shadow:0 6px 18px rgba(0,198,255,0.12) }
-
-.form-actions { display:flex; align-items:center; gap:16px; margin-top:10px }
-.btn.primary { background: linear-gradient(90deg,#00c6ff,#00a6d6); color:#001827; padding:12px 20px; border-radius:999px; border:none; box-shadow:0 8px 20px rgba(0,198,255,0.12); cursor:pointer }
-.btn.primary:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,198,255,0.16) }
-.help-text { color:#667085; font-size:13px }
-
-@media (max-width: 880px) {
-  .contact-grid { grid-template-columns: 1fr; padding: 0 16px }
-  .contact-info { order: 2 }
+  .contact form {
+    padding: 32px 24px;
+  }
 }
 
 /* Footer */
@@ -365,4 +391,77 @@ footer a[href^="mailto:"]:hover {
     width: 32px;
     height: 32px;
   }
+}
+
+.glass-btn {
+  position: relative;
+  width: 255px;
+  height: 55px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Back white layer (right side only) */
+.back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;              /* more space for arrow */
+  height: 100%;
+  background: white;
+  border-radius: 0 40px 40px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 18px;     /* pushes arrow to edge */
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+/* Arrow */
+.arrow {
+  font-size: 22px;
+  color: #0f172a;
+  transform: translateX(0);   /* no left shift now */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+
+.front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #5b7cfa, #6b6dfd);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+  z-index: 2;
+}
+
+/* Hover animation */
+.glass-btn:hover .front {
+  transform: translateX(-32px);
+}
+
+.glass-btn:hover .back {
+  opacity: 1;
+}
+
+.glass-btn:hover .arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+html {
+  scroll-behavior: smooth;
 }
