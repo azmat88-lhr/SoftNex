@@ -599,6 +599,7 @@ footer a[href^="mailto:"]:hover {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  cursor: pointer;
 }
 
 .glass-card:hover .card-hover {
