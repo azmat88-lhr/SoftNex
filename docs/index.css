@@ -399,6 +399,78 @@ footer a[href^="mailto:"]:hover {
   font-size: 14px;
   margin-bottom: 12px;
 }
+.sn-toast-container {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2000;
+}
+.sn-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 420px;
+  background: #ffffff;
+  color: #0b1c2d;
+  padding: 12px 14px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(11,28,45,0.12);
+  border-left: 4px solid transparent;
+  transform: translateY(-8px);
+  opacity: 0;
+  animation: sn-toast-in 320ms ease forwards;
+}
+.sn-toast.hide { opacity: 0; transform: translateY(-12px); transition: opacity .25s, transform .25s; }
+.sn-toast .sn-toast-icon{
+  font-weight: 700;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  display:flex;align-items:center;justify-content:center;border-radius:8px;background:#f0f4ff;color:#27408b;
+}
+.sn-toast .sn-toast-body{flex:1}
+.sn-toast-title{font-weight:700;margin-bottom:4px}
+.sn-toast-message{font-size:14px;color:#374151}
+.sn-toast-close{background:none;border:none;font-size:18px;color:#6b7280;cursor:pointer;padding:6px;border-radius:6px}
+.sn-toast.success{border-left-color:#16a34a}
+.sn-toast.success .sn-toast-icon{background:linear-gradient(135deg,#ecfdf5,#bbf7d0);color:#065f46}
+.sn-toast.error{border-left-color:#ef4444}
+.sn-toast.error .sn-toast-icon{background:linear-gradient(135deg,#fff1f2,#fecaca);color:#991b1b}
+.sn-toast.info{border-left-color:#2563eb}
+.sn-toast.info .sn-toast-icon{background:linear-gradient(135deg,#eff6ff,#bfdbfe);color:#1e3a8a}
+@keyframes sn-toast-in{from{opacity:0;transform:translateY(-8px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.submission-result {
+  max-width: 520px;
+  margin: 18px auto 0;
+  display: block;
+}
+.submission-card{
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  border-radius:16px;
+  box-shadow:0 24px 50px rgba(11,28,45,0.08);
+  padding:18px;
+  border:1px solid rgba(11,28,45,0.04);
+  overflow:hidden;
+  animation: submission-pop .28s cubic-bezier(.2,.9,.3,1) both;
+}
+.submission-card-header{display:flex;align-items:center;gap:12px}
+.submission-card-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#fff;background:linear-gradient(135deg,#5b7cfa,#6b6dfd);flex:0 0 48px}
+.submission-card-title{font-weight:800;font-size:18px;color:#0b1c2d}
+.submission-card .submission-close{margin-left:auto;background:none;border:none;font-size:20px;color:#6b7280;cursor:pointer;padding:6px;border-radius:6px}
+.submission-content{margin-top:12px;display:grid;gap:10px}
+.submission-field{display:flex;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:rgba(11,28,45,0.02);align-items:center}
+.submission-field .label{color:#64748b;font-weight:700;font-size:13px}
+.submission-field .value{color:#0b1c2d;font-weight:600}
+.submission-footer{margin-top:12px;font-size:13px;color:#475569}
+.submission-actions{display:flex;gap:8px;margin-top:12px}
+.btn-ghost{background:transparent;border:1px solid rgba(11,28,45,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;color:#0b1c2d}
+.btn-primary{background:linear-gradient(135deg,#5b7cfa,#6b6dfd);color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer}
+@keyframes submission-pop{from{opacity:0;transform:translateY(6px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
 .skills {
   list-style: none;
   display: flex;

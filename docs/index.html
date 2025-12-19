@@ -96,12 +96,13 @@
 
   <section id="contact" class="contact">
   <h2>Contact Us</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <textarea placeholder="Your Message" rows="4"></textarea>
+  <form id="contact-form">
+    <input name="name" type="text" placeholder="Your Name" required />
+    <input name="email" type="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" rows="4"></textarea>
     <button type="submit" class="btn">Send Message</button>
   </form>
+  <div id="submission-result" aria-live="polite" class="submission-result"></div>
 </section>
 
   <footer>

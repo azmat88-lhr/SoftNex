@@ -2,9 +2,9 @@
   "name": "softnex-website",
   "version": "1.0.0",
   "description": "SoftNex static site with simple backend for contact submissions",
-  "main": "JS/backend.js",
+  "main": "backend.js",
   "scripts": {
-    "start": "node JS/backend.js"
+    "start": "node backend.js"
   },
   "author": "",
   "license": "MIT",
