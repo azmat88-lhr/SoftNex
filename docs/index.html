@@ -41,65 +41,119 @@
 
   </section>
 
-  <section id="about" class="about">
-    <h2>About SoftNex</h2>
-    <p>
+  <section id="about" class="about glass-section">
+  <div class="container">
+    <h2 class="section-title">About SoftNex</h2>
+    <p class="section-desc">
       SoftNex is a professional software company delivering high-quality web,
       mobile, and desktop solutions. We focus on innovation, performance, and
       user experience.
     </p>
-  </section>
+  </div>
+</section>
 
-  <section id="services" class="services">
-    <h2>Our Services</h2>
+<section id="services" class="services glass-section">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+
     <div class="service-box">
-      <div class="card">Web Development</div>
-      <div class="card">Mobile Apps</div>
-      <div class="card">UI / UX Design</div>
-      <div class="card">Custom Software</div>
+      <div class="service-card">
+        <span class="icon">🌐</span>
+        <h3>Web Development</h3>
+        <p>Fast, scalable & modern web solutions</p>
+      </div>
+
+      <div class="service-card">
+        <span class="icon">📱</span>
+        <h3>Mobile Apps</h3>
+        <p>Android & iOS apps with smooth UX</p>
+      </div>
+
+      <div class="service-card">
+        <span class="icon">🎨</span>
+        <h3>UI / UX Design</h3>
+        <p>Clean, user-centric designs</p>
+      </div>
+
+      <div class="service-card">
+        <span class="icon">⚙️</span>
+        <h3>Custom Software</h3>
+        <p>Tailored systems for your business</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="projects" class="projects">
     <h2>Our Projects</h2>
     <p>Coming Soon...</p>
   </section>
-  <section id="team" class="team">
-    <h2>Our Team</h2>
-    <p>Meet the people behind SoftNex.</p>
-    <div class="team-grid">
-      <article class="team-card"
-        data-bio="Azmat Afzal is a passionate and dedicated web developer with 3 years of hands-on experience in front-end development. Having strong command over HTML and CSS, allowing to create well-structured, responsive, and visually appealing websites, Also having basic knowledge of JavaScript, which allows building add interactivity and dynamic behavior to web pages.">
-        <img src="azmat1.jpeg" alt="Azmat Afzal" class="team-img" />
-        <h3 class="team-name">Azmat Afzal</h3>
-        <p class="team-role">Web developer</p>
-        <ul class="skills">
-          <li>JavaScript</li>
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>Node Js</li>
-        </ul>
-      </article>
+  <section id="team" div class="glass-blobs" class="team glass-section">
+  <h2 class="section-title">Our Team</h2>
+  <p class="section-subtitle">Meet the people behind SoftNex.</p>
 
-      <article class="team-card" data-bio="Ammaz Chaudhary is a creative UI/UX designer  and skilled web developer with 7 years of professional experience in front-end development, having strong expertise in HTML, CSS, Bootstrap and JavaScript, enabling to build responsive, modern, and high-performance websites. Specialized in creating clean layouts, smooth user interfaces, and interactive web experiences.">
-        <img src="ammaz.JPG" alt="" class="team-img" />
-        <h3 class="team-name">Ammaz Chaudhary</h3>
-        <p class="team-role">UI/UX Designer/web Developer</p>
-        <ul class="skills">
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JavaScript</li>
-          <li>Node Js</li>
-        </ul>
-      </article>
-  </section>
+  <div class="team-grid">
+
+    <!-- CARD -->
+    <article class="glass-card">
+      <div class="img-wrap">
+        <img src="azmat1.jpeg" alt="Azmat Afzal">
+      </div>
+
+      <h3>Azmat Afzal</h3>
+      <span class="role">Web Developer</span>
+
+      <!-- Hover Content -->
+      <div class="card-hover">
+        <p class="bio">
+          Azmat Afzal is a passionate web developer with 3 years of experience in
+          building responsive and visually appealing websites using modern
+          front-end technologies.
+        </p>
+        <div class="skills">
+          <span>JavaScript</span>
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Node.js</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD -->
+    <article class="glass-card">
+      <div class="img-wrap">
+        <img src="ammaz.JPG" alt="Ammaz Chaudhary">
+      </div>
+
+      <h3>Ammaz Chaudhary</h3>
+      <span class="role">UI/UX Designer & Web Developer</span>
+
+      <!-- Hover Content -->
+      <div class="card-hover">
+        <p class="bio">
+          Ammaz Chaudhary is a creative UI/UX designer and front-end developer
+          with 7 years of experience crafting clean, interactive, and
+          high-performance web experiences.
+        </p>
+        <div class="skills">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>Node.js</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
 
   <section id="contact" class="contact">
   <h2>Contact Us</h2>
   <form id="contact-form">
-    <input name="name" type="text" placeholder="Your Name" required />
-    <input name="email" type="email" placeholder="Your Email" required />
-    <textarea name="message" placeholder="Your Message" rows="4"></textarea>
+    <input name="name" type="text" placeholder="Name" required />
+    <input name="email" type="email" placeholder="Email" required />
+    <textarea name="message" placeholder="Your Message..." rows="4"></textarea>
     <button type="submit" class="btn">Send Message</button>
   </form>
   <div id="submission-result" aria-live="polite" class="submission-result"></div>
