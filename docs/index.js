@@ -8,6 +8,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Beautiful notification / toast component
+  const showNotification = ({ title = '', message = '', type = 'info', timeout = 5000 } = {}) => {
+    let container = document.querySelector('.sn-toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'sn-toast-container';
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `sn-toast ${type}`;
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+      <div class="sn-toast-icon" aria-hidden="true">${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</div>
+      <div class="sn-toast-body">
+        <div class="sn-toast-title">${title}</div>
+        <div class="sn-toast-message">${message}</div>
+      </div>
+      <button class="sn-toast-close" aria-label="Dismiss">×</button>
+    `;
+
+    const close = () => {
+      toast.classList.add('hide');
+      setTimeout(() => toast.remove(), 350);
+    };
+
+    toast.querySelector('.sn-toast-close').addEventListener('click', close);
+    container.appendChild(toast);
+
+    // Auto dismiss
+    if (timeout > 0) {
+      setTimeout(close, timeout);
+    }
+  };
+
   document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', (e) => {
       if (navLinks) navLinks.classList.remove('show');
@@ -34,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
       email: formData.get('email') || form.querySelector('input[placeholder="Your Email"]')?.value || '',
       message: formData.get('message') || form.querySelector('textarea')?.value || ''
     };
+    const resultDiv = document.getElementById('submission-result');
+    const escapeHtml = (s) => String(s).replace(/[&"'<>]/g, (c) => ({'&':'&amp;','"':'&quot;',"'":"&#39;","<":"&lt;",">":"&gt;"}[c]));
 
     try {
       const res = await fetch('/api/contact', {
@@ -43,14 +80,71 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       const data = await res.json();
       if (res.ok && data.ok) {
-        alert('Thank you for contacting SoftNex! We will get back to you soon.');
+        if (resultDiv) {
+          resultDiv.innerHTML = `
+            <div class="submission-card" role="status">
+              <div class="submission-card-header">
+                <div class="submission-card-icon">✓</div>
+                <div>
+                  <div class="submission-card-title">Message Sent</div>
+                  <div class="submission-card-sub">We've received your message</div>
+                </div>
+                <button class="submission-close" aria-label="Close result">×</button>
+              </div>
+              <div class="submission-content">
+                <div class="submission-field"><div class="label">Name</div><div class="value">${escapeHtml(payload.name)}</div></div>
+                <div class="submission-field"><div class="label">Email</div><div class="value">${escapeHtml(payload.email)}</div></div>
+                <div class="submission-field"><div class="label">Message</div><div class="value">${escapeHtml(payload.message)}</div></div>
+              </div>
+              <div class="submission-actions">
+                <button class="btn-ghost" type="button" id="submission-copy">Copy Email</button>
+                <button class="btn-primary" type="button" id="submission-ok">Okay</button>
+              </div>
+              <div class="submission-footer">Where this appears: displayed here on this page and sent to the backend server which logs/stores it.</div>
+            </div>
+          `;
+
+          // hook up controls
+          const closeBtn = resultDiv.querySelector('.submission-close');
+          const copyBtn = resultDiv.querySelector('#submission-copy');
+          const okBtn = resultDiv.querySelector('#submission-ok');
+          const card = resultDiv.querySelector('.submission-card');
+          const clearResult = () => { if (card) { card.classList.add('hide'); setTimeout(()=> resultDiv.innerHTML = '', 300); } };
+          if (closeBtn) closeBtn.addEventListener('click', clearResult);
+          if (okBtn) okBtn.addEventListener('click', clearResult);
+          if (copyBtn) copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(payload.email || '');
+              showNotification({ title: 'Copied', message: 'Email copied to clipboard', type: 'info', timeout: 2200 });
+            } catch (err) {
+              showNotification({ title: 'Copy failed', message: 'Unable to copy email', type: 'error', timeout: 3000 });
+            }
+          });
+        } else {
+          showNotification({
+            title: 'Thank you!',
+            message: 'Thank you for contacting SoftNex! We will get back to you soon.',
+            type: 'success',
+            timeout: 4500
+          });
+        }
         form.reset();
       } else {
-        alert('Submission failed: ' + (data.error || 'Unknown error'));
+        showNotification({
+          title: 'Submission failed',
+          message: data.error || 'Unknown error',
+          type: 'error',
+          timeout: 6000
+        });
       }
     } catch (err) {
       console.error(err);
-      alert('Unable to submit form. Please try again later.');
+      showNotification({
+        title: 'Error',
+        message: 'Unable to submit form. Please try again later.',
+        type: 'error',
+        timeout: 6000
+      });
     }
   });
   const heroCta = document.getElementById('hero-cta');
